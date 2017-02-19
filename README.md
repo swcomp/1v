@@ -1,5 +1,9 @@
 # 1v
-Windows shell utility for centralised management of .NET assembly file version numbers for multiple solutions in one or more CVS repositories. Integration with CI servers for build number increments is straight forward.
+Windows shell utility for centralised management of .NET assembly file version numbers.
+
+Will support multiple solutions in one or more CVS repositories. 
+
+Integration with CI servers for build number increments is straightforward.
 
 Note: You will need to update the paths to the 1v Config directory to match the location of the 1v app folders in the following places:
 
