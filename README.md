@@ -5,7 +5,7 @@ Will support multiple solutions in one or more CVS repositories.
 
 Integration with CI servers for build number increments is straightforward.
 
-## Notes
+### Notes
 
 Note: You will need to update the paths to the 1v Config directory to match the location of the 1v app folders in the following places:
 
