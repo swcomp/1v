@@ -1,0 +1,31 @@
+INSTRUCTIONS FOR UPDATING ALL THE PROJECT FILES TO INCLUDE THE PRE-BUILD ASSEMBLY_INFO UPDATE HOOK
+  
+ 
+STEPS - To add all pre-existing projects in a repo to automated assembly versioning:
+
+1) Install AstroGrep and configure Notepad++ as the default text editor.
+1) Using AstroGrep Search repo folder tree for all project files ( *.csproj, *.vbproj )
+2) Select all found files and open. ( Notepad++ will open all files at once ).
+3) 	a)Search for :   "  <!-- To modify your build process" and confirm found in files same number as AstroGrep search result, may be slightly less.
+	b) Scroll through the Notepad++ search results and make sure there is only one 'hit' per file.
+4) Ctl+F to Replace in all open documents:
+	> Toggle "Extended ..." Search Mode ( bottom left of Replace dialog )
+	> Find expression: ( copy to left margin to get leading spaces for correct project file indent ):
+  <!-- To modify your build process
+	> Find expression ( copy to left margin to get leading spaces for correct project file indent ):
+  <PropertyGroup>\n    <PreBuildEvent>1v "$(MSBuildProjectDirectory)" $(MSBuildProjectExtension)</PreBuildEvent>\n  </PropertyGroup>\n    <!-- To modify your build process
+5) 	a) Replace in all open documents. ( take a note of number of replacements )
+	b) Ctl+Shift+S ( or click SaveAll ) > the red disk icons for each file will turn blue.
+6) Check for modifications in SVN to confirm all files saved ok.
+7) Close all files in Notepad++
+8) Close AstroGrep search and repeat, then order files by Date Modified ASC and the missed files ( without  MSBUILD Targets code ) will be listed at the top.
+9) Select just the missed files and open them.
+10) Manually add the following PreBuildEvent element just before the closing project element ( copy to the left margin to get correct indent ):
+  <PropertyGroup>
+    <PreBuildEvent>1v "$(MSBuildProjectDirectory)" $(MSBuildProjectExtension)</PreBuildEvent>
+  </PropertyGroup>
+11) Commit the changed files to SVN.
+12) Get the latest repo root TestApp_ProductVersionRoot.xml file from SVN.
+13) Build ALL repo projects.
+14) Commit the changed files ( AssemblyInfo.cs, AssemblyInfo.vb and any dlls and exes ) to SVN, these will all now have the correct version number.
+

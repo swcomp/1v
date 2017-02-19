@@ -1,0 +1,10 @@
+Tortoise SVN CLient Hooks
+
+pre_commit_hook
+C:\SVN\Stoneridge\O3Test
+C:\SVN\Stoneridge\O3Test\ProductVersioningPreCommitHooks\ProductVersioningPreCommitHooks\bin\Debug\ProductVersioningPreCommitHooks.exe
+
+
+post_commit_hook
+C:\SVN\Stoneridge\O3Test
+C:\SVN\Stoneridge\O3Test\ProductVersioningPostCommitHooks\ProductVersioningPostCommitHooks\bin\Debug\ProductVersioningPostCommitHooks.exe

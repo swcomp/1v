@@ -1,0 +1,3 @@
+SVN useful commands
+
+svn commit -m "Build successful. Version Number Update..." "R:\1v_Test\"

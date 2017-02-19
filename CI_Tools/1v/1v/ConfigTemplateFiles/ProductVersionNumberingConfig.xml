@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+   <configSections>
+      <!-- TODO: Add section definitions for products and repos -->
+      <!--<section name="products" type="System.Configuration.{?}" />-->
+   </configSections>
+   <products>
+      <product name="prod1">
+         <productVersionRootFile path="{file path}"/>
+         <!-- All C# and VB .NET project files will automatically run this application from MS Build preBuild event and pass in their project path
+      the path will be validated against the following repos collection before the project's AssemblyInfo file is updated. Any custom non-project files
+      that are listed here for each repo will also have their version updated if approporiate for the current MSBuild operation ( normally custom files will
+      only have their version number updated by the build server or an SVN hook if changes to the file are committed.) -->
+
+        <!-- Contains paths to ProductVersionNumberRoot config files for each registered product and also sub-product config files. 
+      Also contains repo paths for product. 
+      TODO: The .NET Project files MSBuild prebuild event actions should remain the same with just project file path and extension type,
+      the project file path can then be used in ProductVersionRootFile.cs to find match with the registered repo path and this find the product 
+      ( and any sub products ) and so the ProductVersionNumberRoot config files for the product and any sub products.
+      
+      Common project files will need to be owned by one product ( or be a product in itself ), the highest dependency in the product tree and the name of this product will need
+      passed as an additional parameter ( using new /common switch ) to 1v from the MSBuild pre build event action, eg:
+      1v /common {Common library owning product name} {Project Directory} {Project Extension}]
+      <PreBuildEvent>1v /common "TestApp" "$(MSBuildProjectDirectory)" $(MSBuildProjectExtension)</PreBuildEvent>
+      -->
+         <repos>
+            <repo name="mainrepo" path="{file path}">
+               <customFiles>
+                  <customFile type="dbVersion" path="{file path}" />
+               </customFiles>
+            </repo>
+            <repo name="assocrepo1" path="{file path1}"/>
+            <repo name="assocrepo2" path="{file path2}"/>
+         </repos>
+      </product>
+      <product name="prod2">
+         <productVersionRootFile path="{file path}"/>
+         <repos>
+            <repo name="mainrepo" path="{file path}"/>
+            <repo name="assocrepo1" path="{file path1}"/>
+            <repo name="assocrepo2" path="{file path2}"/>
+         </repos>
+      </product>
+   </products>
+
+</configuration>
+
+<!--<configuration>
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.6.1" />
+  </startup>
+
+  <userSettings>
+    <_1v.Properties.Settings>
+      <setting name="installationDir" serializeAs="String">
+        <value>C:\CI_Tools\1v</value>
+      </setting>
+    </_1v.Properties.Settings>
+  </userSettings>
+</configuration>-->

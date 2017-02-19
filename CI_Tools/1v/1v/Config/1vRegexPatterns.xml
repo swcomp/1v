@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<regExPatterns>
+  
+ <!-- RegEx patterns may need to be changed in the future so move here from Program.cs --><!--
+      --><!--const string CS_ASSEMBLY_VERSION_PATTERN = @"\[assembly: AssemblyVersion\("".*""\)\]";
+      const string CS_ASSEMBLY_FILEVERSION_PATTERN = @"\[assembly: AssemblyFileVersion\("".*""\)\]";
+      const string VB_ASSEMBLY_VERSION_PATTERN = @"<Assembly: AssemblyVersion=""\("".=""*""\)>
+         ";
+         const string VB_ASSEMBLY_FILEVERSION_PATTERN = @"<Assembly: AssemblyFileVersion=""\("".=""*""\)>";-->
+</regExPatterns>

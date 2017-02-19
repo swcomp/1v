@@ -1,0 +1,21 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="_1v.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="installationDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\CI_Tools\1v\</Value>
+    </Setting>
+    <Setting Name="productsVersionRootDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">D:\_git\gh-pu\1v\CI_Tools\CI_Config\ProductVersionNumbering\</Value>
+    </Setting>
+    <Setting Name="productsVersionConfig" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ProductVersionNumberingConfig.xml</Value>
+    </Setting>
+    <Setting Name="regexPatternsRootDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Config\</Value>
+    </Setting>
+    <Setting Name="regexPatternsFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1vRegexPatterns.xml</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

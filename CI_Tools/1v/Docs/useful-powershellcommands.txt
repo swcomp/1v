@@ -1,0 +1,5 @@
+Useful powershell commands
+
+Check assembly version
+
+[Reflection.AssemblyName]::GetAssemblyName('R:\1v_Test\TestApp\bin\TestApp.dll').Version

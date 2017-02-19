@@ -1,0 +1,7 @@
+1v sample commands
+
+1v "TestApp" "R:\Azure\SWSDEV2\1v_Test\TestApp" ".csproj"
+
+TestApp /b 9997
+
+

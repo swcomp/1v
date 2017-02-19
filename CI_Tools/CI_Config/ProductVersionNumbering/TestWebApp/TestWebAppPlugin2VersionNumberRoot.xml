@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<productVersion>   
+   <!-- Dev, UAT, Release, Patch, Hotfix -->
+   <buildType></buildType>
+   <assemblyVersion>
+      <major>0</major>
+      <minor>0</minor>
+      <build>0</build>
+      <revision>0</revision>
+   </assemblyVersion>
+   <assemblyFileVersion>
+      <major>0</major>
+      <minor>0</minor>
+      <build>0</build>
+      <revision>0</revision>
+   </assemblyFileVersion>
+</productVersion>

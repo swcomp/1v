@@ -1,0 +1,88 @@
+<cruisecontrol xmlns:cb="urn:ccnet.config.builder">
+  <!-- This is your CruiseControl.NET Server Configuration file. 
+       Add your projects below! -->
+	   
+   <project name="Test_App" webURL="http://swsdev2.westeurope.cloudapp.azure.com/ccnet/" queue="CCNETConfig">
+        <category>1v Demo</category>
+        
+		<workingDirectory>C:\CCNet\Build\Test_App</workingDirectory>
+		<artifactDirectory>C:\CCNet\Build\Test_App\Deploy</artifactDirectory>
+
+		<!-- specify a state folder to prevent CCNet from saving it in Program Files\CruiseControl.NET\server 
+			 programs may not standard write their data in it on windows Vista and up)
+		-->
+		<state type="state" directory="C:\CCNet\State" />
+		<!-- TODO: Add in CVS changes trigger build ... -->
+        <tasks>
+			<!-- Set the product build number in root version file for assembly version numbering -->
+			<!-- Note: could set entire product version number here, eg Major-Minor-Build-Revision -->
+			<exec>
+                <executable>c:\Windows\System32\cmd.exe</executable>
+                <buildArgs>/C 1v TestWebApp /b 109</buildArgs>
+				<buildTimeoutSeconds>10</buildTimeoutSeconds>
+            </exec>			
+			<!-- Build the solution -->
+			<msbuild>
+				<executable>C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe</executable>
+				<workingDirectory>D:\1v_Test\</workingDirectory>
+				<projectFile>TestWebApp.sln</projectFile>
+				<buildArgs>/p:Configuration=Debug /v:diag</buildArgs>
+				<targets>Build</targets>
+				<timeout>900</timeout>
+				<logger>C:\Program Files (x86)\CruiseControl.NET\server\ThoughtWorks.CruiseControl.MsBuild.dll</logger>
+			</msbuild>
+			<conditional>
+				<conditions>
+				<lastStatusCondition>
+					<value>Success</value>
+				</lastStatusCondition>
+				</conditions>
+				<tasks>
+					<!-- ========================================================== -->
+					<!-- Tasks to perform if build succeeded -->
+					<!-- ========================================================== -->	
+					<exec>
+						<!-- Cleanup to remove any SVN locks...
+						TODO: Do lock check and conditional cleanup. -->
+						<executable>C:\Program Files\VisualSVN Server\bin\svn.exe</executable>
+							<buildArgs>cleanup "D:\1v_Test"</buildArgs>
+						<buildTimeoutSeconds>10</buildTimeoutSeconds>
+					</exec>
+					<exec>
+						<!-- commit updated AssemblyInfo files and other files with new version number from build -->	
+						<executable>C:\Program Files\VisualSVN Server\bin\svn.exe</executable>
+						<!-- TODO: Add function to 1v to return current product version number for SVN commit message here... -->
+						<!-- SVN credentials needed for commit -->
+						<buildArgs>commit -m "Build successful. Version Number Update..." "R:\1v_Test" --username swrtest2 --password _~[n+)\z0./O</buildArgs>
+						<buildTimeoutSeconds>10</buildTimeoutSeconds>
+					</exec>
+				</tasks>
+				<elseTasks>
+					<!-- ========================================================== -->
+					<!-- Tasks to perform if build failed -->
+					<!-- ========================================================== -->	
+					<!-- Revert root file version changes as build has failed.
+					TODO: add to 1v functionality as auto using some kind of state... 
+					flat file, local DB, environment var? -->
+					<exec>
+						<executable>c:\Windows\System32\cmd.exe</executable>
+						<buildArgs>/C 1v TestWebApp /b 99</buildArgs>
+						<buildTimeoutSeconds>10</buildTimeoutSeconds>
+					</exec>	
+				</elseTasks>
+			</conditional>
+		</tasks>
+
+        <publishers>
+            <xmllogger />
+            <statistics>
+                <statisticList>
+                    <statistic name='metric_name' xpath='xpath expression' generateGraph='true' include='true'/>
+                    <firstMatch name='metric_name' xpath='xpath expression' include='false'/>
+                </statisticList>
+            </statistics>
+        </publishers>
+
+    </project>	  
+
+</cruisecontrol>
