@@ -59,7 +59,7 @@ namespace _1v
             {
                try
                {
-                  
+                  // Default syntax in project file prebuild command is: IF NOT $(ConfigurationName) == Debug 1v "$(SolutionName)" "$(MSBuildProjectDirectory)" "$(MSBuildProjectExtension)"
                   UpdateAssemblyInfoVersionNumbers(pvr, args[1], args[2]);
                }
                catch (Exception e)
