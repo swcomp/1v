@@ -101,7 +101,15 @@ namespace _1v
             XmlNode av = _rootXmlDoc.SelectSingleNode("//productVersion/assemblyVersion");
             av["major"].InnerText = productVersion.Major ?? av["major"].InnerText;
             av["minor"].InnerText = productVersion.Minor ?? av["minor"].InnerText;
-            av["build"].InnerText = productVersion.Build ?? av["build"].InnerText;
+            if (productVersion.AutoIncrement)
+            {
+               av["build"].InnerText = (int.Parse(av["build"].InnerText) + 1).ToString();
+            }
+            else
+            {
+               av["build"].InnerText = productVersion.Build ?? av["build"].InnerText;
+            }
+            
             av["revision"].InnerText = productVersion.Revision ?? av["revision"].InnerText;
 
             /* Log */
@@ -116,18 +124,19 @@ namespace _1v
          XmlNode afv = _rootXmlDoc.SelectSingleNode("//productVersion/assemblyFileVersion");
          afv["major"].InnerText = productVersion.Major ?? afv["major"].InnerText;
          afv["minor"].InnerText = productVersion.Minor ?? afv["minor"].InnerText;
-         if (productVersion.Build != null)
+
+         if (productVersion.AutoIncrement)
          {
-            if (productVersion.AutoIncrement)
-            {
-               afv["build"].InnerText = (int.Parse(afv["build"].InnerText) + 1).ToString();
-            }
-            else
+            afv["build"].InnerText = (int.Parse(afv["build"].InnerText) + 1).ToString();
+         }
+         else
+         {
+            if (productVersion.Build != null)
             {
                afv["build"].InnerText = productVersion.Build;
             }
          }
-
+         
          /* Log */
          _logger.Log(LogLevel.Info, "Set AssemblyFileVersion= " +
                      String.Concat(productVersion.Major, '.',

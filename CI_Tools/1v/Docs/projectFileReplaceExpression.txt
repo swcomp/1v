@@ -13,7 +13,9 @@ STEPS - To add all pre-existing projects in a repo to automated assembly version
 	> Find expression: ( copy to left margin to get leading spaces for correct project file indent ):
   <!-- To modify your build process
 	> Find expression ( copy to left margin to get leading spaces for correct project file indent ):
-  <PropertyGroup>\n    <PreBuildEvent>1v "$(MSBuildProjectDirectory)" $(MSBuildProjectExtension)</PreBuildEvent>\n  </PropertyGroup>\n    <!-- To modify your build process
+	<PropertyGroup>\n    
+		<PreBuildEvent>IF NOT $(ConfigurationName) == Debug 1v "$(SolutionName)" "$(MSBuildProjectDirectory)" "$(MSBuildProjectExtension)"</PreBuildEvent>\n  
+	</PropertyGroup>\n    <!-- To modify your build process
 5) 	a) Replace in all open documents. ( take a note of number of replacements )
 	b) Ctl+Shift+S ( or click SaveAll ) > the red disk icons for each file will turn blue.
 6) Check for modifications in SVN to confirm all files saved ok.
